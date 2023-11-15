@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+
+        {% load static %}
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+
+        <link rel="icon" href="{% static 'image/logo.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+        <title>{% block title %}{{ title }}{% endblock title %}</title>
+    </head>
+
+    <body>
+    
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'image/logo.ico' %}" alt="Logo" width="30" height="30" style="border-radius: 50%;" class="d-inline-block align-text-top">
+                    Grupo número 2
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="link-secondary" style="text-decoration:none;" href="{% url 'home' %}">Inicio</a>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item d-flex align-items-center"><label class="bg-dark text-center text-primary p-2" >{{ user|capfirst }}</label></li>    
+                            <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'create' %}">Nueva Entrada</a></li>
+                            <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                        {% else %}
+                            <li class="nav-item d-flex align-items-center"><label type="text" class="bg-dark text-center text-white p-2"> Usuario Anonimo</label></li>
+                            <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                            <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'register' %}">Registrarse</a></li>
+                        {% endif %}
+                    </ul>
+                </div>    
+            </div>
+        </nav>
+
+
+        <div class= "container-fluid main-section">
+            <div class= "row justify-content-center">
+                <div class= "col-8 d-block mt-5 mb-5">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer mt-5 py-2 bg-dark">
+            <div class="container">
+                <span class="text-white d-flex justify-content-center">Grupo Número 2 &copy; 2023</span>
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-twitter-square"></i>
+                <i class="fab fa-instagram-square"></i>
+            </div>
+        </footer>
+        
+        
+    </body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "Blog/base.html" %}
+
+{% block title %}{{ title }}{% endblock title%}
+
+{% block content %}
+
+    {% for post in posts %}
+
+        {% comment %} 
+        <h2 class="mb-4">{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        <p><em>Creado por {{post.user }} el {{ post.created_at }}</em></p> 
+        {% endcomment %}
+
+        <div class="card text-center">
+            <div class="card-header bg-dark text-white">
+                <strong>{{ post.title|upper }}</strong>
+            </div>
+            <div class="body_card card-body bg-secondary-emphasis">
+                <p class="card-text">{{ post.content }}</p>
+            </div>
+            <div class="card-footer text-body-secondary bg-dark text-secondary">
+                <em>Creado por {{post.user }} el {{ post.created_at }}</em>
+            </div>
+        </div>
+        <br />
+
+    {% endfor %}
+
+{% endblock %}
