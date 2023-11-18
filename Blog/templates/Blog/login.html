@@ -30,4 +30,24 @@
         </div>
     </div>
 
+    {%for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "Acción Exitosa",
+                    "text": '{{msg}}',
+                    "icon": "success"
+                })
+            </script>
+            {%else%}
+            <script>
+                Swal.fire({
+                    "title": "Ha ocurrido un error",
+                    "text": '{{msg}}',
+                    "icon": "error"
+                })
+            </script>
+        {%endif%} 
+    {%endfor%}
+
 {% endblock %}

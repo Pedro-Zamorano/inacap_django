@@ -9,28 +9,41 @@
         <p>
             <label class="fw-bold mb-2" for="id_username">Nombre de usuario:</label> 
             <input type="text" name="username" maxlength="150" autofocus class="form-control" required id="id_username">
-            <span class="mb-2 text-secondary">Requerido. <br/> Se aceptan 150 caracteres o menos. Solo letras, dígitos y @/./+/-/_ únicamente.</span>
         </p>
         <p>
             <label class="fw-bold mb-2" for="id_password1">Contraseña:</label> 
             <input type="password" name="password1" class="form-control" required id="id_password1">
             <span>
                 <ul class="list-unstyled text-secondary">
-                    <li>Su contraseña no puede ser similar a su otra información personal.</li>
-                    <li>Su contraseña debe contener al menos 8 caracteres.</li>
-                    <li>Su contraseña no puede ser de uso común.</li>
-                    <li>Su contraseña no puede ser completamente numérica.</li> 
                 </ul>            
             </span>
         </p>
         <p>
             <label class="fw-bold mb-2" for="id_password2">Confirmar contraseña:</label> 
             <input type="password" name="password2" class="form-control" required id="id_password2">
-            <span class="text-secondary">Ingrese la misma contraseña para verificación.</span>
         </p>
         <button class="btn btn-outline-dark mt-4" type="submit">Registrar</button>
     </form>  
 
-    
+    {%for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "Acción Exitosa",
+                    "text": '{{msg}}',
+                    "icon": "success"
+                })
+            </script>
+            {%else%}
+            <script>
+                Swal.fire({
+                    "title": "Ha ocurrido un error",
+                    "text": '{{msg}}',
+                    "icon": "error"
+                })
+            </script>
+        {%endif%} 
+    {%endfor%}
+
 
 {% endblock %}
