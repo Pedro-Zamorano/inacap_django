@@ -35,7 +35,7 @@
                 <a class="link-secondary" style="text-decoration:none;" href="{% url 'home' %}">Inicio</a>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if user.is_authenticated %}
-                            <li class="nav-item d-flex align-items-center"><label class="bg-dark text-center text-primary p-2" >{{ user|capfirst }}</label></li>    
+                            <li class="nav-item d-flex align-items-center"><label class="bg-dark text-center text-white p-2" >{{ user|capfirst }}</label></li>    
                             <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'create' %}">Nueva Entrada</a></li>
                             <li class="nav-item"><a class="nav-link link-active p-2" href="{% url 'logout' %}">Cerrar Sesión</a></li>
                         {% else %}
