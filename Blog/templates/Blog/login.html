@@ -1,0 +1,53 @@
+{% extends "Blog/base.html" %}
+
+{% block title %}{{ title }}{% endblock title%}
+
+{% block content %}
+      
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h3 class="card-title">Iniciar Sesión</h3>
+                    </div>
+                    <div class="card-body mt-3 mb-3 text-center">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.password.label_tag }}
+                                {{ form.password }}
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block mt-3">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {%for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "Acción Exitosa",
+                    "text": '{{msg}}',
+                    "icon": "success"
+                })
+            </script>
+            {%else%}
+            <script>
+                Swal.fire({
+                    "title": "Ha ocurrido un error",
+                    "text": '{{msg}}',
+                    "icon": "error"
+                })
+            </script>
+        {%endif%} 
+    {%endfor%}
+
+{% endblock %}

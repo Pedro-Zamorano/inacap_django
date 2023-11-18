@@ -1,0 +1,49 @@
+{% extends "Blog/base.html" %}
+
+{% block title %}{{ title }}{% endblock title%}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label class="fw-bold mb-2" for="id_username">Nombre de usuario:</label> 
+            <input type="text" name="username" maxlength="150" autofocus class="form-control" required id="id_username">
+        </p>
+        <p>
+            <label class="fw-bold mb-2" for="id_password1">Contraseña:</label> 
+            <input type="password" name="password1" class="form-control" required id="id_password1">
+            <span>
+                <ul class="list-unstyled text-secondary">
+                </ul>            
+            </span>
+        </p>
+        <p>
+            <label class="fw-bold mb-2" for="id_password2">Confirmar contraseña:</label> 
+            <input type="password" name="password2" class="form-control" required id="id_password2">
+        </p>
+        <button class="btn btn-outline-dark mt-4" type="submit">Registrar</button>
+    </form>  
+
+    {%for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "Acción Exitosa",
+                    "text": '{{msg}}',
+                    "icon": "success"
+                })
+            </script>
+            {%else%}
+            <script>
+                Swal.fire({
+                    "title": "Ha ocurrido un error",
+                    "text": '{{msg}}',
+                    "icon": "error"
+                })
+            </script>
+        {%endif%} 
+    {%endfor%}
+
+
+{% endblock %}
